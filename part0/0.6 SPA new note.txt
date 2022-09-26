@@ -1,0 +1,36 @@
+title 0.6: SPA new note
+
+note over browser, server:
+browser loads page 
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->browser: HTML-code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server-->browser: spa.js
+
+note over browser: 
+When you now create a new note, 
+you'll notice that the browser sends 
+only one request to the server.
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+note over browser: 
+The POST request contains the new note as JSON-data 
+containing both the content of the note (content) and the timestamp (date): 
+end note
+
+note over browser: 
+browser re renders the list with new note
+end note
+
+note over server: 
+The server responds with status code 201 created.
+This time the server does not ask for a redirect, 
+the browser stays on the same page, 
+and it sends no further HTTP requests. 
+end note
+server-->browser: status code 201 , message "note created"
