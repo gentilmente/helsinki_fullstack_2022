@@ -3,7 +3,7 @@ const Header = (props) => {
 };
 
 const Part = (wrapperObj_props) => {
-  console.log(wrapperObj_props);
+  //console.log(wrapperObj_props);
   return (
     <p>
       {wrapperObj_props.part.name} {wrapperObj_props.part.exercises}
@@ -12,19 +12,27 @@ const Part = (wrapperObj_props) => {
 };
 
 const Content = (props) => {
-  console.log(props);
+  //console.log(props);
   return (
     <div>
-      <Part part={props.part1} />{" "}
-      {/*send an object that is wrapped by var props*/}
-      <Part part={props.part2} />
-      <Part part={props.part3} />
+      <Part part={props.parts[0]} />{" "}
+      {/*send an object named 'part' that is wrapped by var 'props'*/}
+      <Part part={props.parts[1]} />
+      <Part part={props.parts[2]} />
     </div>
   );
 };
 
 const Total = (props) => {
-  return <p>Number of exercises {props.total}</p>;
+  console.log(props);
+  return (
+    <p>
+      Number of exercises{" "}
+      {props.parts[0].exercises +
+        props.parts[1].exercises +
+        props.parts[2].exercises}
+    </p>
+  );
 };
 
 const App = () => {
@@ -41,12 +49,13 @@ const App = () => {
     name: "State of a component",
     exercises: 14,
   };
+  const parts = [part1, part2, part3];
 
   return (
     <div>
       <Header course={course} />
-      <Content part1={part1} part2={part2} part3={part3} />
-      <Total total={part1.exercises + part2.exercises + part3.exercises} />
+      <Content parts={parts} />
+      <Total parts={parts} />
     </div>
   );
 };
