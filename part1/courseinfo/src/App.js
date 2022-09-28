@@ -15,9 +15,10 @@ const Content = (props) => {
   console.log(props);
   return (
     <div>
-      <Part part={props.parts[0]} />
-      <Part part={props.parts[1]} />
-      <Part part={props.parts[2]} />
+      <Part part={props.part1} />{" "}
+      {/*send an object that is wrapped by var props*/}
+      <Part part={props.part2} />
+      <Part part={props.part3} />
     </div>
   );
 };
@@ -40,15 +41,12 @@ const App = () => {
     name: "State of a component",
     exercises: 14,
   };
-  const parts = [part1, part2, part3];
 
   return (
     <div>
       <Header course={course} />
-      <Content parts={parts} />
-      <Total
-        total={parts[0].exercises + parts[1].exercises + parts[2].exercises}
-      />
+      <Content part1={part1} part2={part2} part3={part3} />
+      <Total total={part1.exercises + part2.exercises + part3.exercises} />
     </div>
   );
 };
