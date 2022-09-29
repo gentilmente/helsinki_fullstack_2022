@@ -1,9 +1,19 @@
 import { useState } from "react";
+const Header = ({ text }) => <h2>{text}</h2>;
 
 const Button = ({ handler, text }) => <button onClick={handler}>{text}</button>;
 
-const Votes = ({ selected, votes }) => {
-  return <div>has {votes[selected]} votes</div>;
+const Votes = ({ selected, votes }) => <div>has {votes[selected]} votes</div>;
+
+const MostVoted = ({ anecdotes, votes }) => {
+  const indexOfWinner = votes.indexOf(Math.max(...votes));
+  return (
+    <div>
+      <Header text="Anecdote with most votes" />
+      {anecdotes[indexOfWinner]}
+      <Votes votes={votes} selected={indexOfWinner} />
+    </div>
+  );
 };
 
 const App = () => {
@@ -17,6 +27,7 @@ const App = () => {
     "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.",
   ];
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
+  const [selected, setSelected] = useState(0);
 
   const voteAnecdote = () => {
     const newVotes = [...votes];
@@ -27,17 +38,17 @@ const App = () => {
     setVotes(votes);
     */
   };
-
-  const [selected, setSelected] = useState(0);
   const selectAnecdote = () =>
     setSelected(Math.floor(Math.random() * anecdotes.length));
 
   return (
     <div>
+      <Header text="Anecdote of the day" />
       <p>{anecdotes[selected]}</p>
       <Votes selected={selected} votes={votes} />
       <Button handler={voteAnecdote} text="vote +1" />
       <Button handler={selectAnecdote} text="next anecdote" />
+      <MostVoted anecdotes={anecdotes} votes={votes} />
     </div>
   );
 };
