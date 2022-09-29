@@ -3,9 +3,7 @@ import { useState } from "react";
 const Button = ({ handler, text }) => <button onClick={handler}>{text}</button>;
 
 const Votes = ({ selected, votes }) => {
-  console.log(votes[selected]);
-  console.log(votes);
-  return <div>has {votes[selected]}</div>;
+  return <div>has {votes[selected]} votes</div>;
 };
 
 const App = () => {
@@ -18,11 +16,16 @@ const App = () => {
     "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
     "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.",
   ];
-  const votes = [0, 0, 0, 0, 0, 0, 0];
-  const [vote, setVote] = useState(0);
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
+
   const voteAnecdote = () => {
     const newVotes = [...votes];
-    setVote((newVotes[selected] = vote + 1));
+    newVotes[selected] = newVotes[selected] + 1;
+    setVotes(newVotes);
+    /* not this way...
+    votes[selected] = votes[selected] + 1;
+    setVotes(votes);
+    */
   };
 
   const [selected, setSelected] = useState(0);
