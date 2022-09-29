@@ -14,16 +14,18 @@ const Show = ({ text, value }) => (
 
 const Statistics = ({ stats }) => {
   //console.log(stats);
-  return (
-    <div>
-      <Show text="Good" value={stats.good} />
-      <Show text="Neutral" value={stats.neutral} />
-      <Show text="Bad" value={stats.bad} />
-      <Show text="All" value={stats.all} />
-      <Show text="Average" value={stats.average} />
-      <Show text="Positive" value={stats.positive + "%"} />
-    </div>
-  );
+  if (stats.all !== 0)
+    return (
+      <div>
+        <Show text="Good" value={stats.good} />
+        <Show text="Neutral" value={stats.neutral} />
+        <Show text="Bad" value={stats.bad} />
+        <Show text="All" value={stats.all} />
+        <Show text="Average" value={stats.average} />
+        <Show text="Positive" value={stats.positive + "%"} />
+      </div>
+    );
+  else return <span>No feedback given</span>;
 };
 
 const App = () => {
