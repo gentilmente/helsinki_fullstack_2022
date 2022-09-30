@@ -28,7 +28,7 @@ const Total = ({ parts }) => {
   //console.log(parts);
   return (
     <b>
-      Number of exercises{" "}
+      Number of exercises
       {parts.reduce((result, part) => result + part.exercises, 0)}
     </b>
   );
