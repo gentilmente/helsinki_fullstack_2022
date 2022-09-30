@@ -24,17 +24,15 @@ const Content = ({ parts }) => {
   );
 };
 
-/* const Total = (props) => {
-  console.log(props);
+const Total = ({ parts }) => {
+  //console.log(parts);
   return (
-    <p>
+    <b>
       Number of exercises{" "}
-      {props.parts[0].exercises +
-        props.parts[1].exercises +
-        props.parts[2].exercises}
-    </p>
+      {parts.reduce((result, part) => result + part.exercises, 0)}
+    </b>
   );
-}; */
+};
 
 const Course = ({ course }) => {
   //console.log(course);
@@ -42,6 +40,7 @@ const Course = ({ course }) => {
     <div>
       <Header course={course} />
       <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   );
 };
