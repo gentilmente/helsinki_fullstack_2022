@@ -7,19 +7,17 @@ const App = () => {
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
-      console.log("hola");
+      console.log("req");
       setCountries(response.data);
-      console.log("chau");
+      console.log("res");
     });
   }, []);
 
   const handleInputChange = (event) => {
-    //console.log(event.target.value);
-    //countries.forEach((c) => console.log(c.name.common));
     const filteredo = countries.filter((c) =>
       c.name.common.includes(event.target.value)
     );
-    console.log(filteredo);
+    //console.log(filteredo);
     setFiltered([...filteredo]);
     //console.log("coso", filtered); //ojo, trae el contenido anterior al set
   };
@@ -32,7 +30,9 @@ const App = () => {
         {/*console.log(countries)*/}
         {filtered.length === 1 ? (
           <div>
-            <h1> {filtered[0].flag} </h1>
+            <h1>
+              {filtered[0].flag} {filtered[0].name.common}
+            </h1>
             <p>area: {filtered[0].area}</p>
             <p>capital: {filtered[0].capital}</p>
             <h3>Languages</h3>
