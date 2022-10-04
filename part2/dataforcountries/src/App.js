@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Country from "./components/Country";
+import Countries from "./components/Countries";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
@@ -14,8 +16,9 @@ const App = () => {
   }, []);
 
   const handleInputChange = (event) => {
+    const inputValue = event.target.value.toLowerCase();
     const filteredo = countries.filter((c) =>
-      c.name.common.includes(event.target.value)
+      c.name.common.toLowerCase().includes(inputValue)
     );
     //console.log(filteredo);
     setFiltered([...filteredo]);
@@ -25,25 +28,15 @@ const App = () => {
   return (
     <div>
       <h1>Cities</h1>
-      find countries <input onChange={handleInputChange} />
+      find countries <input onChange={handleInputChange} autoFocus />
       <ul>
         {/*console.log(countries)*/}
-        {filtered.length === 1 ? (
-          <div>
-            <h1>
-              {filtered[0].flag} {filtered[0].name.common}
-            </h1>
-            <p>area: {filtered[0].area}</p>
-            <p>capital: {filtered[0].capital}</p>
-            <h3>Languages</h3>
-            <ul>
-              {Object.values(filtered[0].languages).map((l) => (
-                <li key={l}>{l}</li>
-              ))}
-            </ul>
-          </div>
+        {filtered.length < 1 ? (
+          <Countries countries={countries} />
+        ) : filtered.length === 1 ? (
+          <Country country={filtered[0]} />
         ) : filtered.length <= 10 ? (
-          filtered.map((c) => <li key={c.cca3}>{c.name.common}</li>)
+          <Countries countries={filtered} />
         ) : (
           "Too many matches, specify another filter"
         )}
