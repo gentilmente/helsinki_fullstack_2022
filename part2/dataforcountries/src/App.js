@@ -21,7 +21,7 @@ const App = () => {
     );
     console.log(filteredo);
     setFiltered([...filteredo]);
-    console.log("coso", filtered); //ojo, trae el contenido anterior al set
+    //console.log("coso", filtered); //ojo, trae el contenido anterior al set
   };
 
   return (
@@ -36,14 +36,14 @@ const App = () => {
             <p>area: {filtered[0].area}</p>
             <p>capital: {filtered[0].capital}</p>
             <h3>Languages</h3>
-            {/*  <ul>
-              {filtered[0].languages.map((l) => (
-                <li>{l}</li>
+            <ul>
+              {Object.values(filtered[0].languages).map((l) => (
+                <li key={l}>{l}</li>
               ))}
-              </ul> */}
+            </ul>
           </div>
         ) : filtered.length <= 10 ? (
-          filtered.map((c) => <li key={c.name.common}>{c.name.common}</li>)
+          filtered.map((c) => <li key={c.cca3}>{c.name.common}</li>)
         ) : (
           "Too many matches, specify another filter"
         )}
