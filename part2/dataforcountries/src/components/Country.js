@@ -1,5 +1,7 @@
+import Weather from "./Weather";
+
 const Country = ({ country }) => {
-  //sconsole.log("country", country);
+  //console.log("country", country);
   return (
     <div>
       <h1>
@@ -13,6 +15,7 @@ const Country = ({ country }) => {
           <li key={l}>{l}</li>
         ))}
       </ul>
+      <Weather capital={country.capital} />
     </div>
   );
 };

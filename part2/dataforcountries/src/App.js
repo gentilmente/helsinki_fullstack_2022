@@ -9,9 +9,9 @@ const App = () => {
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
-      console.log("req");
+      //console.log("req");
       setCountries(response.data);
-      console.log("res");
+      //console.log("res");
     });
   }, []);
 
