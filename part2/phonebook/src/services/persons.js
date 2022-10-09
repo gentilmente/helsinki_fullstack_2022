@@ -29,13 +29,7 @@ const update = (newObject) =>
     });
 
 const remove = (id) =>
-  axios
-    .delete(`${baseUrl}/${id}`)
-    .then((resp) => resp.data)
-    .catch((error) => {
-      alert(error);
-      console.log("fail", error);
-    });
+  axios.delete(`${baseUrl}/${id}`).then((resp) => resp.data);
 
 export default {
   getAll,

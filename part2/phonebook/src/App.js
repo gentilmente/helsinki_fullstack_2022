@@ -10,7 +10,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
-  const [successMessage, setSuccessMessage] = useState(null);
+  const [notification, setNotificationMessage] = useState(null);
 
   useEffect(() => {
     personServices.getAll().then((persons) => {
@@ -39,25 +39,31 @@ const App = () => {
             persons.map((p) => (p.id === editingPers.id ? updatedPerson : p))
           )
         );
-      setSuccessMessage(`'${editingPers.name}' was modified`);
+      setNotificationMessage(`Succeed!, '${editingPers.name}' was modified`);
     } else {
       editingPers = { name: newName, number: newNumber };
       personServices.create(editingPers).then((created) => {
         setPersons(persons.concat(created));
-        setSuccessMessage(`'${editingPers.name}' was added`);
+        setNotificationMessage(`Succeed!, '${editingPers.name}' was added`);
       });
     }
     setNewName("");
     setNewNumber("");
     setTimeout(() => {
-      setSuccessMessage(null);
+      setNotificationMessage(null);
     }, 5000);
   };
 
   const handlerDeleteBtn = (person) => {
     if (window.confirm(`Delete ${person.name}?`)) {
-      personServices.remove(person.id);
-      setPersons(persons.filter((p) => p.id !== person.id));
+      personServices
+        .remove(person.id)
+        .then(() => setPersons(persons.filter((p) => p.id !== person.id)))
+        .catch((p) =>
+          setNotificationMessage(
+            `X, information of ${person.name} was already removed`
+          )
+        );
     }
   };
 
@@ -79,7 +85,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={successMessage} />
+      <Notification message={notification} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <PersonForm
         addPerson={addPerson}
