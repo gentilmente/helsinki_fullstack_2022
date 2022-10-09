@@ -34,6 +34,13 @@ const App = () => {
     }
   };
 
+  const handlerDeleteBtn = (person) => {
+    if (window.confirm(`Delete ${person.name}?`)) {
+      personServices.remove(person.id);
+      setPersons(persons.filter((p) => p.id !== person.id));
+    }
+  };
+
   const handleNameChange = (event) => {
     //console.log(event.target.value);
     setNewName(event.target.value);
@@ -60,7 +67,7 @@ const App = () => {
         newNumber={newNumber}
         handleNumberChange={handleNumberChange}
       />
-      <Persons persons={persons} filter={filter} />
+      <Persons persons={persons} filter={filter} remove={handlerDeleteBtn} />
     </div>
   );
 };
