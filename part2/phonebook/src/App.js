@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Notification from "./components/Notification";
 import Filter from "./components/Filter";
 import Persons from "./components/Persons";
 import PersonForm from "./components/PersonForm";
@@ -9,6 +10,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
+  const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
     personServices.getAll().then((persons) => {
@@ -37,14 +39,19 @@ const App = () => {
             persons.map((p) => (p.id === editingPers.id ? updatedPerson : p))
           )
         );
+      setSuccessMessage(`'${editingPers.name}' was modified`);
     } else {
       editingPers = { name: newName, number: newNumber };
       personServices.create(editingPers).then((created) => {
         setPersons(persons.concat(created));
+        setSuccessMessage(`'${editingPers.name}' was added`);
       });
     }
     setNewName("");
     setNewNumber("");
+    setTimeout(() => {
+      setSuccessMessage(null);
+    }, 5000);
   };
 
   const handlerDeleteBtn = (person) => {
@@ -72,6 +79,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={successMessage} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <PersonForm
         addPerson={addPerson}
