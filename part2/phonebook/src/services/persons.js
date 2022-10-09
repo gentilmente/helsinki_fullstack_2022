@@ -13,22 +13,22 @@ const getAll = () =>
 const create = (newObject) =>
   axios
     .post(baseUrl, newObject)
-    .then((response) => response.data)
+    .then((res) => res.data)
     .catch((error) => {
       alert(error);
       console.log("fail", error);
     });
 
-const update = (id, newObject) =>
+const update = (newObject) =>
   axios
-    .put(`${baseUrl}/${id}`, newObject)
-    .then((response) => response.data)
+    .put(`${baseUrl}/${newObject.id}`, newObject)
+    .then((res) => res.data)
     .catch((error) => {
       alert(error);
       console.log("fail", error);
     });
 
-const remove = (id) => {
+const remove = (id) =>
   axios
     .delete(`${baseUrl}/${id}`)
     .then((resp) => resp.data)
@@ -36,7 +36,6 @@ const remove = (id) => {
       alert(error);
       console.log("fail", error);
     });
-};
 
 export default {
   getAll,

@@ -18,20 +18,33 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault();
-    if (persons.some((p) => p.name === newName))
+    if (persons.some((p) => p.name === newName && p.number === newNumber)) {
       alert(`${newName} is already added to phonebook`);
-    else {
-      const personObject = {
-        name: newName,
-        number: newNumber,
-      };
-
-      personServices.create(personObject).then((created) => {
+      return;
+    }
+    let editingPers = persons.find(
+      (p) => p.name === newName && p.number !== newNumber
+    );
+    if (
+      editingPers &&
+      window.confirm(`${editingPers.name} Exists, edit number?`)
+    ) {
+      const updatedPerson = { ...editingPers, number: newNumber };
+      personServices
+        .update(updatedPerson)
+        .then(() =>
+          setPersons(
+            persons.map((p) => (p.id === editingPers.id ? updatedPerson : p))
+          )
+        );
+    } else {
+      editingPers = { name: newName, number: newNumber };
+      personServices.create(editingPers).then((created) => {
         setPersons(persons.concat(created));
-        setNewName("");
-        setNewNumber("");
       });
     }
+    setNewName("");
+    setNewNumber("");
   };
 
   const handlerDeleteBtn = (person) => {
