@@ -27,7 +27,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Cities</h1>
+      <h1>Weather</h1>
       find countries <input onChange={handleInputChange} autoFocus />
       <ul>
         {/*console.log(countries)*/}
