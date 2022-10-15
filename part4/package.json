@@ -1,0 +1,32 @@
+{
+  "name": "blog_list",
+  "version": "1.0.0",
+  "description": "exercise part 4 helsinki",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "test",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gentilmente/blog_list.git"
+  },
+  "keywords": [
+    "backend",
+    "express"
+  ],
+  "author": "gentilmente",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gentilmente/blog_list/issues"
+  },
+  "homepage": "https://github.com/gentilmente/blog_list#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20"
+  }
+}

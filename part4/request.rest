@@ -1,0 +1,26 @@
+GET http://localhost:3003/api/blogs
+###
+GET http://localhost:3003/api/blogs/6971d5ac0a59b880379a742
+###
+POST http://localhost:3003/api/blogs HTTP/1.1
+content-type: application/json
+
+{
+    "title": "blogsito",
+    "author": "gentilmente",
+    "url": "http://blabal",
+    "likes": 2
+}
+###
+//DELETE http://notitasbackend.fly.dev/api/blogs/1
+DELETE http://localhost:3003/api/blogs/6349baa506f4f8d270f5b4bd
+###
+DELETE http://localhost:3003/api/blogs/13
+###
+PUT http://localhost:3003/api/blogs/63471f21071c75d18d5a2612 HTTP/1.1
+content-type: application/json
+
+{
+    "content":"mogodb is easy",
+    "important":false
+}
