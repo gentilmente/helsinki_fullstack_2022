@@ -6,10 +6,10 @@ POST http://localhost:3003/api/blogs HTTP/1.1
 content-type: application/json
 
 {
-    "title": "blogsito",
+    "title": "coso",
     "author": "gentilmente",
-    "url": "http://blabal",
-    "likes": 2
+    "url": "http://coso",
+    "likes": 0
 }
 ###
 //DELETE http://notitasbackend.fly.dev/api/blogs/1
