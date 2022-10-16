@@ -1,6 +1,6 @@
 GET http://localhost:3003/api/blogs
 ###
-GET http://localhost:3003/api/blogs/6971d5ac0a59b880379a742
+GET http://localhost:3003/api/blogs/634b33473d147bbb5f8dc35c
 ###
 POST http://localhost:3003/api/blogs HTTP/1.1
 content-type: application/json
