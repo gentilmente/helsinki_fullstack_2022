@@ -1,5 +1,5 @@
 const listHelper = require('../utils/list_helper');
-const listWithOneBlog = require('./testMockData');
+const mockedBlogs = require('./testMockData');
 
 const blogs = [
   {
@@ -23,7 +23,25 @@ describe('total likes', () => {
   });
 
   test('totalLikes returns sum of all likes', () => {
-    const result = listHelper.totalLikes(listWithOneBlog);
+    const result = listHelper.totalLikes(mockedBlogs);
     expect(result).toBe(36);
+  });
+});
+
+describe('fovorite blog', () => {
+  const fav = {
+    _id: '5a422b3a1b54a676234d17f9',
+    title: 'Canonical string reduction',
+    author: 'Edsger W. Dijkstra',
+    url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
+    likes: 12,
+    __v: 0,
+  };
+
+  test('fav returns one with the most likes', () => {
+    const result = listHelper.favoriteBlog(mockedBlogs);
+    console.log(result);
+
+    expect(result).toEqual(fav);
   });
 });
