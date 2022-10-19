@@ -40,8 +40,19 @@ describe('fovorite blog', () => {
 
   test('fav returns one with the most likes', () => {
     const result = listHelper.favoriteBlog(mockedBlogs);
-    console.log(result);
-
     expect(result).toEqual(fav);
+  });
+});
+
+describe('author with most blogs', () => {
+  const prolificAuthor = {
+    author: 'Robert C. Martin',
+    blogs: 3,
+  };
+
+  test('returns the author with most blogs', () => {
+    const result = listHelper.mostBlogs(mockedBlogs);
+    // console.log(result);
+    expect(result).toEqual(prolificAuthor);
   });
 });
