@@ -1,11 +1,8 @@
-/* eslint-disable no-return-assign */
-/* eslint-disable comma-dangle */
 const dummy = (blogs) => (blogs ? 1 : 0);
 
 const totalLikes = (blogs) => blogs.reduce((acc, curr) => acc + curr.likes, 0);
 
 const favoriteBlog = (blogs) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
   blogs.reduce(
     (prev, current) => (prev.likes > current.likes ? prev : current),
     0
