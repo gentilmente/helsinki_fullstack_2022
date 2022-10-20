@@ -1,3 +1,5 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable comma-dangle */
 const dummy = (blogs) => (blogs ? 1 : 0);
 
 const totalLikes = (blogs) => blogs.reduce((acc, curr) => acc + curr.likes, 0);
@@ -14,15 +16,28 @@ const mostBlogs = (blogs) => {
     (acc, o) => ((acc[o.author] = (acc[o.author] || 0) + 1), acc),
     {}
   );
-  //console.log(obj);
+  // console.log(obj);
   const res = Object.keys(obj).reduce((a, b) => (obj[a] > obj[b] ? a : b));
-
-  //console.log(res);
+  // console.log(res);
 
   const result = { author: res, blogs: obj[res] };
-
-  //console.log(result);
   return result;
+};
+
+const mostLikes = (blogs) => {
+  const sumLikesByAuthor = Array.from(
+    blogs.reduce(
+      (m, { author, likes }) => m.set(author, (m.get(author) || 0) + likes),
+      new Map()
+    ),
+    ([author, likes]) => ({ author, likes })
+  );
+
+  const popularAuthor = sumLikesByAuthor.reduce((max, author) =>
+    max.likes > author.likes ? max : author
+  );
+
+  return popularAuthor;
 };
 
 module.exports = {
@@ -30,4 +45,5 @@ module.exports = {
   totalLikes,
   favoriteBlog,
   mostBlogs,
+  mostLikes,
 };
