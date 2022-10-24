@@ -6,7 +6,7 @@ const app = require("../app");
 const api = supertest(app);
 const Blog = require("../models/blog");
 
-jest.setTimeout(32000);
+jest.setTimeout(22000);
 
 beforeEach(async () => {
   await mongoose.connection.dropCollection("blogs");
@@ -53,13 +53,13 @@ describe("addition of a new note", () => {
   });
 
   test("blog added without 'likes' prop, must have 0 by default", async () => {
-    const newBlogi = {
+    const newBlog = {
       title: "dummy",
       url: "http://example.com",
     };
     await api
       .post("/api/blogs")
-      .send(newBlogi)
+      .send(newBlog)
       .expect(201)
       .expect("Content-Type", /application\/json/);
 
@@ -90,6 +90,21 @@ describe("deletion of a blog", () => {
 
     const title = blogsAtEnd.map((blog) => blog.title);
     expect(title).not.toContain(blogToDelete.title);
+  });
+});
+
+describe("update of a blog", () => {
+  test("returns the same object sent with modifications", async () => {
+    const blogs = await helper.blogsInDb();
+    const blogToUpdate = blogs[0];
+    blogToUpdate.likes = 323232;
+
+    const updated = await api
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(blogToUpdate)
+      .expect(200);
+
+    expect(updated.body.likes).toBe(blogToUpdate.likes);
   });
 });
 
