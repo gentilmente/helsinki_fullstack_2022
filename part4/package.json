@@ -4,10 +4,10 @@
   "description": "exercise part 4 helsinki",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "jest --verbose",
-    "lint": "eslint .",
-    "dev": "nodemon index.js"
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "test": "NODE_ENV=test jest --verbose --runInBand --forceExit --detectOpenHandles",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -43,6 +43,7 @@
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1",
     "prettier-eslint": "^15.0.1",
+    "supertest": "^6.3.0",
     "typescript": "^4.8.4"
   },
   "jest": {
