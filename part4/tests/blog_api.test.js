@@ -55,6 +55,7 @@ test("a valid note can be added ", async () => {
 test("blog added without 'likes' prop, must have 0 by default", async () => {
   const newBlog = {
     title: "dummy",
+    url: "http://example.com",
   };
   await api
     .post("/api/blogs")
@@ -65,6 +66,15 @@ test("blog added without 'likes' prop, must have 0 by default", async () => {
   const blogsAtEnd = await helper.blogsInDb();
   const { likes } = blogsAtEnd.pop();
   expect(likes).toBe(0);
+});
+
+test("blog added without 'title' or 'url' prop, must return '400 Bad Request.'", async () => {
+  const newBlog = {
+    // title: "entra",
+    author: "nobody",
+    likes: 0,
+  };
+  await api.post("/api/blogs").send(newBlog).expect(400);
 });
 
 afterAll(() => {
