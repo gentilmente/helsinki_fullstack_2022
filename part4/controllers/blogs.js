@@ -8,8 +8,9 @@ blogsRouter.get("/", (request, response) => {
 });
 
 blogsRouter.post("/", (request, response) => {
-  const blog = new Blog(request.body);
-
+  const obj = request.body;
+  obj.likes = obj.likes ? obj.likes : 0;
+  const blog = new Blog(obj);
   blog.save().then((result) => {
     response.status(201).json(result);
   });

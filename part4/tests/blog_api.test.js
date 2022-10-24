@@ -36,7 +36,9 @@ test("check if prop id exists", async () => {
 test("a valid note can be added ", async () => {
   const newBlog = {
     title: "async/await simplifies making async calls",
-    important: true,
+    author: "nobody",
+    url: "http://www.example.com",
+    likes: 0,
   };
   await api
     .post("/api/blogs")
@@ -48,6 +50,21 @@ test("a valid note can be added ", async () => {
   expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1);
   const titles = blogsAtEnd.map((n) => n.title);
   expect(titles).toContain("async/await simplifies making async calls");
+});
+
+test("blog added without 'likes' prop, must have 0 by default", async () => {
+  const newBlog = {
+    title: "dummy",
+  };
+  await api
+    .post("/api/blogs")
+    .send(newBlog)
+    .expect(201)
+    .expect("Content-Type", /application\/json/);
+
+  const blogsAtEnd = await helper.blogsInDb();
+  const { likes } = blogsAtEnd.pop();
+  expect(likes).toBe(0);
 });
 
 afterAll(() => {
